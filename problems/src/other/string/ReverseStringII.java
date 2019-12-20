@@ -11,27 +11,45 @@ package other.string;
  * <p>Solution O(N)
  */
 public class ReverseStringII {
-  public static void main(String[] args) {
-    System.out.println(new ReverseStringII().reverseStr("abcdefg", 2));
-  }
 
-  public String reverseStr(String s, int k) {
-    StringBuilder sb = new StringBuilder();
-    for (int i = 0, l = s.length(); i < l; i++) {
-      if (i % (2 * k) == 0) {
-        int count = 0;
-        StringBuilder temp = new StringBuilder();
-        while (count < k && i < l) {
-          temp.append(s.charAt(i));
-          count++;
-          i++;
+    public String reverseStr(String s, int k) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0, l = s.length(); i < l; i++) {
+            if (i % (2 * k) == 0) {
+                int count = 0;
+                StringBuilder temp = new StringBuilder();
+                while (count < k && i < l) {
+                    temp.append(s.charAt(i));
+                    count++;
+                    i++;
+                }
+                sb.append(temp.reverse());
+            }
+            if (i < l) {
+                sb.append(s.charAt(i));
+            }
         }
-        sb.append(temp.reverse());
-      }
-      if (i < l) {
-        sb.append(s.charAt(i));
-      }
+        return sb.toString();
     }
-    return sb.toString();
-  }
+
+    public static char[] reverseString(char[] s) {
+        if (s == null || s.length < 2) {
+            return null;
+        }
+        int left = -1;
+        int right = s.length;
+        while (++left < --right) {
+            char c = s[left];
+            s[left] = s[right];
+            s[right] = c;
+        }
+
+        return s;
+    }
+
+    public static void main(String[] args) {
+    System.out.println(new ReverseStringII().reverseStr("abcdefg", 2));
+      char []s = {'a','b','c'};
+      System.out.println(reverseString(s));
+    }
 }
